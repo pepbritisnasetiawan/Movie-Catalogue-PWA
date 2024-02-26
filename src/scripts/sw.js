@@ -22,14 +22,12 @@ const assetsToCache = [
 self.addEventListener('install', (event) => {
   console.log('Installing Service Worker....');
 
-  // TODO: Caching App Shell Resourceeve
   event.waitUntil(CacheHelper.cachingAppShell([...assetsToCache]));
 });
 
 self.addEventListener('activate', (event) => {
   console.log('Activating Service Worker...');
 
-  // TODO: Delete old chaces
   event.waitUntil(CacheHelper.deleteOldCache());
 });
 
@@ -38,6 +36,5 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith(fetch(event.request));
 
-  // TODO: add/get fetch request to/from caches
   event.respondWith(CacheHelper.revalidateCache(event.request));
 });
