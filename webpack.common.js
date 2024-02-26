@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
@@ -42,6 +43,24 @@ module.exports = {
     }),
     new WorkboxWebpackPlugin.GenerateSW({
       swDest: './sw.bundle.js',
+      runtimeCaching: [
+        {
+          urlPattern: ({ url }) =>
+            url.href.startsWith('https://api.themoviedb.org/3/'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'themoviedb-api',
+          },
+        },
+        {
+          urlPattern: ({ url }) =>
+            url.href.startsWith('https://image.tmdb.org/t/p/w500/'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'themoviedb-image-api',
+          },
+        },
+      ],
     }),
   ],
 };
