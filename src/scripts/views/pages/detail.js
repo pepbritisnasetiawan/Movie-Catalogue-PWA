@@ -23,7 +23,7 @@ const Detail = {
         id: movie.id,
         title: movie.title,
         overview: movie.overview,
-        bacdrop_path: movie.bacdrop_path,
+        backdrop_path: movie.backdrop_path,
         vote_average: movie.vote_average,
       },
     });
